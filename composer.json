@@ -1,5 +1,5 @@
 {
-    "name": "foxdevuz/ngap",
+    "name": "foxdevuz/ngap-laravel",
     "description": "Nutgram based Telegram bot admin panel - A ready-to-use Laravel package for building Telegram bots with admin functionality.",
     "keywords": ["telegram", "bot", "laravel", "nutgram", "admin-panel"],
     "homepage": "https://abdullajonov.uz",
