@@ -3,7 +3,6 @@
 namespace Ngap\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Ngap\Models\Admin;
 use SergiX44\Nutgram\Nutgram;
 
 class NgapServiceProvider extends ServiceProvider
@@ -12,8 +11,17 @@ class NgapServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/ngap.php', 'ngap');
 
+        // Defer Nutgram instantiation - only create when actually needed
         $this->app->singleton(Nutgram::class, function ($app) {
-            return new Nutgram(config('ngap.telegram.token'));
+            $token = config('ngap.telegram.token');
+
+            if (empty($token)) {
+                throw new \InvalidArgumentException(
+                    'Telegram bot token is not configured. Please set TELEGRAM_BOT_TOKEN in your .env file.'
+                );
+            }
+
+            return new Nutgram($token);
         });
     }
 
@@ -22,8 +30,11 @@ class NgapServiceProvider extends ServiceProvider
         $this->registerPublishing();
         $this->registerMigrations();
         $this->registerTranslations();
-        $this->registerRoutes();
-        $this->registerMainAdmin();
+
+        // Only register routes when not running in console or during package discovery
+        if (!$this->app->runningInConsole()) {
+            $this->registerRoutes();
+        }
     }
 
     protected function registerPublishing(): void
@@ -70,24 +81,9 @@ class NgapServiceProvider extends ServiceProvider
 
     protected function registerRoutes(): void
     {
-        // Load telegram routes if the file exists in the package
         $packageRoutes = __DIR__ . '/../../routes/telegram.php';
         if (file_exists($packageRoutes)) {
             require $packageRoutes;
-        }
-    }
-
-    protected function registerMainAdmin(): void
-    {
-        $mainAdminId = config('ngap.admin.main_admin_id');
-        if ($mainAdminId && $this->app->runningInConsole() === false) {
-            try {
-                if (Admin::count() === 0) {
-                    Admin::createMainAdmin((int) $mainAdminId, 'Main Admin');
-                }
-            } catch (\Exception $e) {
-                // Table might not exist yet
-            }
         }
     }
 }
