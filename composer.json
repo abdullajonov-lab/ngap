@@ -1,0 +1,50 @@
+{
+    "name": "foxdevuz/ngap",
+    "description": "Nutgram based Telegram bot admin panel - A ready-to-use Laravel package for building Telegram bots with admin functionality.",
+    "keywords": ["telegram", "bot", "laravel", "nutgram", "admin-panel"],
+    "homepage": "https://abdullajonov.uz",
+    "support": {
+        "issues": "https://github.com/abdullajonov-lab/ngap/issues",
+        "source": "https://github.com/abdullajonov-lab/ngap"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bobur",
+            "email": "abdullajonovboburjon05@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "nutgram/nutgram": "^4.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/database": "^10.0|^11.0|^12.0",
+        "illuminate/translation": "^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ngap\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ngap\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ngap\\Providers\\NgapServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
