@@ -1,0 +1,42 @@
+{
+    "name": "abdullajonov-lab/nutgram-admin-panel",
+    "description": "FilamentPHP admin panel plugin for Telegram bot management with Nutgram",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["laravel", "filament", "telegram", "nutgram", "admin-panel", "broadcast"],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^3.0",
+        "flowframe/laravel-trend": "^0.4.0",
+        "illuminate/support": "^11.0|^12.0",
+        "nutgram/laravel": "^1.6",
+        "spatie/laravel-package-tools": "^1.16"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AbdullajonovLab\\NutgramAdminPanel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AbdullajonovLab\\NutgramAdminPanel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AbdullajonovLab\\NutgramAdminPanel\\NutgramAdminPanelServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
